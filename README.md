@@ -28,8 +28,8 @@ Para ejecutar este proyecto, sigue estos pasos:
 
 1. Clona este repositorio:
    ```bash
-   git clone <URL_DEL_REPOSITORIO>
-   cd <NOMBRE_DEL_REPOSITORIO>
+   git clone https://github.com/JulioRom/exercise-pokeapi-data-modeling
+   cd exercise-pokeapi-data-modeling
    ```
 
 2. Crea un entorno virtual e instala las dependencias:
