@@ -1,54 +1,116 @@
-<!--hide-->
-# StarWars blog database
-<!--endhide-->
+# Modelado de la Base de Datos de la PokeAPI
 
-<onlyfor saas="false" withBanner="false">
+## 📌 Introducción
+Este proyecto implementa un modelo de base de datos inspirado en la [PokeAPI](https://pokeapi.co/), estructurando la información de los Pokémon, sus habilidades, movimientos, tipos, formas y versiones en un modelo relacional utilizando **SQLAlchemy ORM** en Python.
 
-## 🌱 How to start this project
+El objetivo principal es representar de manera eficiente las relaciones entre las entidades de la PokeAPI, asegurando que la base de datos sea escalable y optimizada para consultas rápidas.
 
+## 📊 Diagrama de Base de Datos
+El modelo de base de datos se ha construido siguiendo un diagrama entidad-relación que organiza la información en las siguientes tablas:
 
-**Important**: To do this activity, you need to `fork` [this repo](https://github.com/breatheco-de/exercise-starwars-data-modeling) into your **Github** account and then open the forked repo on [Codespaces](https://4geeks.com/lesson/what-is-github-codespaces) (recommended) or Gitpod.
+### 🔹 **Tablas principales**
+1. **`Pokemon`**: Contiene la información básica de cada Pokémon.
+2. **`Ability`**: Lista de habilidades disponibles en el juego.
+3. **`Move`**: Lista de movimientos que pueden aprender los Pokémon.
+4. **`Type`**: Lista de tipos de Pokémon (Agua, Fuego, Planta, etc.).
+5. **`Form`**: Diferentes formas en las que puede aparecer un Pokémon.
+6. **`Version`**: Versiones de los juegos donde aparecen los Pokémon.
 
+### 🔹 **Tablas intermedias**
+Estas tablas establecen las relaciones entre los elementos anteriores:
+1. **`PokemonAbility`**: Relaciona los Pokémon con sus habilidades.
+2. **`PokemonMove`**: Relaciona los Pokémon con los movimientos que pueden aprender.
+3. **`PokemonType`**: Relaciona los Pokémon con sus tipos.
+4. **`PokemonForm`**: Relaciona los Pokémon con sus distintas formas.
 
-Inside the `src/models.py` file you will find a couple of classes describing an example database.
+## 💻 Instalación
+Para ejecutar este proyecto, sigue estos pasos:
 
-Here is a 10 min video explaining what UML is: [https://www.youtube.com/watch?v=UI6lqHOVHic](https://www.youtube.com/watch?v=UI6lqHOVHic)
+1. Clona este repositorio:
+   ```bash
+   git clone <URL_DEL_REPOSITORIO>
+   cd <NOMBRE_DEL_REPOSITORIO>
+   ```
 
-</onlyfor>
+2. Crea un entorno virtual e instala las dependencias:
+   ```bash
+   python -m venv env
+   source env/bin/activate  # En Windows usa: env\Scripts\activate
+   pip install -r requirements.txt
+   ```
 
-We are going to be creating the Entity Relationship Diagram for your StarWars Blog Database, a very similar diagram to this one:
+3. Genera la base de datos y el diagrama ejecutando:
+   ```bash
+   python src/models.py
+   ```
 
-![Starwars Diagram](https://github.com/breatheco-de/exercise-starwars-data-modeling/blob/master/assets/example.png?raw=true)
-[Click to open diagram](https://app.quickdatabasediagrams.com/#/d/LxNXQZ)
+4. Verifica que se haya generado el archivo `diagram.png` con el modelo de datos.
 
-> 🔥 You can use this FREE tool to practice your diagram for the first time: https://app.quickdatabasediagrams.com/#/d/
+## 🏗️ Modelado de la Base de Datos
+A continuación, se explican las entidades clave y sus relaciones:
 
-## 💻 Installation
+### 1️⃣ **Pokemon**
+- `pokemon_id`: Identificador único.
+- `name`: Nombre del Pokémon.
+- `base_experience`: Puntos de experiencia base.
+- `height`: Altura en decímetros.
+- `is_default`: Indica si es la forma principal.
+- `game_index`: Índice en los juegos.
+- `version_id`: Clave foránea a `Version`.
 
-1. Get inside the environment `$ pipenv shell`
+### 2️⃣ **Ability**
+- `ability_id`: Identificador único.
+- `name`: Nombre de la habilidad.
+- `url`: URL de referencia.
 
-2. Install all dependencies `$ pipenv install`
+### 3️⃣ **Move**
+- `move_id`: Identificador único.
+- `name`: Nombre del movimiento.
+- `url`: URL de referencia.
 
-3. Generate the diagram as many times as you need `$ python src/models.py`
+### 4️⃣ **Type**
+- `type_id`: Identificador único.
+- `name`: Nombre del tipo (ej. Agua, Fuego).
+- `url`: URL de referencia.
 
-4. Open the file `diagram.png` to check out your UML diagram!
+### 5️⃣ **Version**
+- `version_id`: Identificador único.
+- `name`: Nombre de la versión del juego.
+- `url`: URL de referencia.
+- `version_group`: Grupo de versiones.
 
+### 6️⃣ **Tablas intermedias**
+Estas tablas permiten relaciones **muchos a muchos**:
+- **`PokemonAbility`**: Relaciona los Pokémon con habilidades.
+- **`PokemonMove`**: Relaciona los Pokémon con movimientos.
+- **`PokemonType`**: Relaciona los Pokémon con tipos.
+- **`PokemonForm`**: Relaciona los Pokémon con sus formas.
 
-## 📝 Instructions
+## 🏆 Características del Proyecto
+✅ Modelado de datos basado en la PokeAPI.<br>
+✅ Uso de **SQLAlchemy ORM** para la manipulación de datos.<br>
+✅ Generación de diagrama automática con `eralchemy2`.<br>
+✅ Relación entre entidades optimizada.<br>
+✅ Base de datos escalable y optimizada para consultas rápidas.<br>
 
-Your Job is to update the `src/models.py` file with the code needed to replicate the StarWars data model.
+## 🛠️ Herramientas y Tecnologías
+- **Python 3**
+- **SQLAlchemy ORM**
+- **PostgreSQL o SQLite** (según configuración)
+- **Eralchemy2** (para generar diagramas)
 
-The project is using the SQLAlchemy Python library to generate the database.
+## 📜 Licencia
+Este proyecto está bajo la licencia MIT. Puedes usarlo, modificarlo y distribuirlo libremente.
 
-- Your project must have a table `User` that will represent your blog users.
-- Your blog users will be able to login and save their favorite planets and characters.
-- The database should store the user favorites.
-- The database should store characters and planets.
-- What other tables do you think a blog like this might have?
-- What properties should go inside the user? or inside the Character or Favorite table?
-- What are the relationships between those tables?
-- Please add at least 4 models with all of their properties.
-- Generate the `diagram.png` file at the end by running `$ python src/models.py` on the console.
+## 📢 Contribuciones
+Si deseas contribuir a este proyecto, por favor abre un _issue_ o envía un _pull request_ con tus mejoras.
 
-This and many other projects are built by students as part of the 4Geeks Academy [Coding Bootcamp](https://4geeksacademy.com/us/coding-bootcamp) by [Alejandro Sanchez](https://twitter.com/alesanchezr) and many other contributors. Find out more about our [Full Stack Developer Course](https://4geeksacademy.com/us/coding-bootcamps/part-time-full-stack-developer), and [Data Science Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning).
+---
 
+Con esta estructura, el modelo de datos está listo para integrarse con cualquier aplicación basada en la PokeAPI. 🎮🔥
+
+## 👨‍💻 **Autor**
+
+- **Desarrollado por JulioRom**
+- 📧 **Correo:** [julioandrescampos@gmail.com](mailto:julioandrescampos@gmail.com)
+- 🔗 **GitHub:** [https://github.com/JulioRom](https://github.com/JulioRom)
